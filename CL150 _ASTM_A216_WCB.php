@@ -16,7 +16,7 @@
 
     function CL150_WCB_section_2($x){
 
-        $va_max_pressure_allowed_by_valve =   (10**-7 * $x**3) - (0.0002*$x**2) - (0.2264*$x) - (309.15);
+        $va_max_pressure_allowed_by_valve =   (10**-7 * $x**3) - (0.0002*$x**2) - (0.2264*$x) + (309.15);
 
 
         echo "La presión maxima para esa temperatura es: ".$va_max_pressure_allowed_by_valve. "psig"."<br>";
@@ -32,7 +32,7 @@
     
     function CL150_CF8M_section_2($x){
     
-        $va_max_pressure_allowed_by_valve = (3*10**-9*$x**4) - (5*10**-6*$x**3) + (0.0034*$x**2) - (1.0732*$x) + (356.93);
+        $va_max_pressure_allowed_by_valve = -5e-07*$x**3 + 0.0006*$x**2 - 0.4427*$x + 311.63;
 
         echo "La presión maxima para esa temperatura es: ".$va_max_pressure_allowed_by_valve. "psig"."<br>";
 
@@ -154,29 +154,29 @@
             CL150_WCB_section_1($x);
         }
             //condificionales para el material de los asientos
-            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 336))
+            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 339))
             {
                 CL150_WCB_section_2($x);
             }
-            else if(($va_seat_material == 'PTFE') && ($x > 336) && ($x <= 400))
+            else if(($va_seat_material == 'PTFE') && ($x > 339) && ($x <= 400))
             {
-                CL150_PTFE($x);
+                CL150_CL300_PTFE($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 400))
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 401.9))
             {
                 CL150_WCB_section_2($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 400) && ($x <= 450))
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 401.9) && ($x <= 450))
             {
-                CL150_TFM1700($x);
+                CL150_CL300_TFM1700($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 475))
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 476))
             {
                 CL150_WCB_section_2($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 475) && ($x <= 500))
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 476) && ($x <= 500))
             {
-                CL150_TFM1600($x);
+                CL150_CL300_TFM1600($x);
             }
             else{
                 echo "Temperatura fuera del rango soportado";
@@ -192,29 +192,29 @@
             CL150_CF8M_section_1($x);
         }
             //condificionales para el material de los asientos
-            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 340))
+            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 334.6))
             {
                 CL150_CF8M_section_2($x);
             }
-            else if(($va_seat_material == 'PTFE') && ($x > 340) && ($x <= 400))
+            else if(($va_seat_material == 'PTFE') && ($x > 334.6) && ($x <= 400))
             {
-                CL150_PTFE($x);
+                CL150_CL300_PTFE($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 405))
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 392.9))
             {
                 CL150_CF8M_section_2($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 405) && ($x <= 450))
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 392.9) && ($x <= 450))
             {
-                CL150_TFM1700($x);
+                CL150_CL300_TFM1700($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 470))
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 467))
             {
                 CL150_CF8M_section_2($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 470) && ($x <= 500))
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 467) && ($x <= 500))
             {
-                CL150_TFM1600($x);
+                CL150_CL300_TFM1600($x);
             }
             else{
                 echo "Temperatura fuera del rango soportado";
@@ -225,34 +225,113 @@
     //Cálculo para modelos ASME CL300, material del cuerpo WCB (acero al carbono)
         else if(($va_class == 'CL300') && ($va_body_material == 'WCB / 316 SS')){
 
-        if(($x >= -50) && ($x <= 100))
+        if(($x >= -20) && ($x <= 100))
         {
-            CL150_CF8M_section_1($x);
+            CL300_WCB_section_1($x);
         }
             //condificionales para el material de los asientos
-            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 340))
+            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 204.7))
             {
-                CL150_CF8M_section_2($x);
+                CL300_WCB_section_2($x);
             }
-            else if(($va_seat_material == 'PTFE') && ($x > 340) && ($x <= 400))
+            else if(($va_seat_material == 'PTFE') && ($x > 204.7) && ($x <= 400))
             {
-                CL150_PTFE($x);
+                CL150_CL300_PTFE($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 405))
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 283.8))
             {
-                CL150_CF8M_section_2($x);
+                CL300_WCB_section_2($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 405) && ($x <= 450))
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 283.8) && ($x <= 450))
             {
-                CL150_TFM1700($x);
+                CL150_CL300_TFM1700($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 470))
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 406.8))
             {
-                CL150_CF8M_section_2($x);
+                CL300_WCB_section_2($x);
             }
-            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 470) && ($x <= 500))
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 406.8) && ($x <= 500))
             {
-                CL150_TFM1600($x);
+                CL150_CL300_TFM1600($x);
+            }
+            else{
+                echo "Temperatura fuera del rango soportado";
+            }
+
+    }
+
+    else if(($va_class == 'CL300') && ($va_body_material == '316 SS / 316 SS')){
+
+        if(($x >= -50) && ($x <= 100))
+        {
+            CL300_CF8M_section_1($x);
+        }
+            //condificionales para el material de los asientos
+            else if(($va_seat_material == 'PTFE') && ($x > 100) && ($x <= 226.5))
+            {
+                CL300_CF8M_section_2($x);
+            }
+            else if(($va_seat_material == 'PTFE') && ($x > 226.5) && ($x <= 400))
+            {
+                CL150_CL300_PTFE($x);
+            }
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 100) && ($x <= 311.3))
+            {
+                CL300_CF8M_section_2($x);
+            }
+            else if(($va_seat_material == 'TFM (TFM 1700)') && ($x > 311.3) && ($x <= 450))
+            {
+                CL150_CL300_TFM1700($x);
+            }
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 428))
+            {
+                CL300_CF8M_section_2($x);
+            }
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 428) && ($x <= 500))
+            {
+                CL150_CL300_TFM1600($x);
+            }
+            else{
+                echo "Temperatura fuera del rango soportado";
+            }
+
+    }
+
+    else if(($va_class == 'CL600') && ($va_body_material == 'WCB / 316 SS')){
+
+        if(($x >= -20) && ($x <= 100))
+        {
+            CL600_WCB_section_1($x);
+        }
+            //condificionales para el material de los asientos
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 281))
+            {
+                CL600_WCB_section_2($x);
+            }
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 281) && ($x <= 500))
+            {
+                CL600_TFM1600($x);
+            }
+            else{
+                echo "Temperatura fuera del rango soportado";
+            }
+
+    }
+    
+    else if(($va_class == 'CL600') && ($va_body_material == '316 SS / 316 SS')){
+
+        if(($x >= -50) && ($x <= 100))
+        {
+            CL600_CF8M_section_1($x);
+        }
+            //condificionales para el material de los asientos
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 100) && ($x <= 307.5))
+            {
+                CL600_CF8M_section_2($x);
+            }
+            else if(($va_seat_material == 'TFM (TFM 1600)') && ($x > 307.5) && ($x <= 500))
+            {
+                CL600_TFM1600($x);
             }
             else{
                 echo "Temperatura fuera del rango soportado";
